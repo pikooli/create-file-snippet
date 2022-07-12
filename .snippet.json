@@ -1,0 +1,61 @@
+{
+  "basic": {
+    "prefix": ["basic-react"],
+    "body": [
+      "",
+      "type Props = {};",
+      "",
+      "const ${TM_FILENAME/\\..*//g} : React.FC<Props> = () => {",
+      "  return <div></div>;",
+      "};",
+      "",
+      "export default ${TM_FILENAME/\\..*//g};"
+    ],
+    "description": "Tsx basic file"
+  },
+  "container": {
+    "prefix": ["react-container"],
+    "body": [
+      "import type { NextPage } from \"next\";",
+      "import { use$0 } from \"$0/$0.hook\";",
+      "import { $0View } from \"$0/$0.view\";",
+      "",
+      "export const $0: NextPage = () => {",
+      "  const hook = $0Hook();",
+      "  return <$0View {...hook} />;",
+      "};"
+    ],
+    "description": "Container for react component"
+  },
+  "hook": {
+    "prefix": ["react-hook"],
+    "body": [
+      "import { useEffect, useState } from \"react\";",
+      "",
+      "export const use$0 = () => {",
+      "",
+      "  useEffect(() => {",
+      "  }, []);",
+      "",
+      "  return { };",
+      "};"
+    ],
+    "description": "Hook for react component"
+  },
+  "View": {
+    "prefix": ["react-view"],
+    "body": [
+      "import React from \"react\";",
+      "",
+      "export type $0ViewProps = {",
+      "};",
+      "",
+      "export const $0View = ({",
+      "}: $0ViewProps) => {",
+      "  return (",
+      "  );",
+      "};"
+    ],
+    "description": "View for react component"
+  }
+}
