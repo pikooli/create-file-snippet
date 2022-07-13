@@ -10,18 +10,27 @@ import {
 } from "vscode";
 
 const wsPath = workspace.workspaceFolders![0].uri.fsPath; // gets the path of the first workspace folder
+const homePath = wsPath.split("/").slice(0, 3).join("/");
+const SNIPPETS_PATH = `${homePath}/Library/Application\ Support/Code/User/snippets/snippet.code-snippets`;
 const wsedit = new WorkspaceEdit();
 const PROMPT =
   "Enter the path and name of the file you want to create. EI: apps/test.js";
-const URI = `${wsPath}/.snippet.json`;
+
 let currentlyOpenTabfilePath =
   window.activeTextEditor?.document?.fileName.replace(wsPath, "");
 let config: any;
 
+// in progress
+const removeComment = (str: string) => {
+  str = str.replace(/\/\/.+/g, "");
+  return str;
+};
+
 //
 const parceConfigFile = () => {
   return new Promise((resolve, reject) => {
-    fs.readFile(URI, "utf8", (err, data) => {
+    fs.readFile(SNIPPETS_PATH, "utf8", (err, data) => {
+      if (err) console.log(err);
       try {
         config = JSON.parse(data);
         for (let key in config) {
@@ -29,6 +38,7 @@ const parceConfigFile = () => {
         }
         resolve(config);
       } catch (e) {
+        console.log(e);
         window.showErrorMessage("Something is wrong with the config file");
       }
     });
@@ -59,7 +69,6 @@ const main = async () => {
     .then(async (value) => {
       if (value && value !== currentlyOpenTabfilePath) {
         const filePath = Uri.file(wsPath + "/" + value);
-        console.log("filePath", filePath);
         await createFile({ filePath, content: config["basic"].body });
       }
     });
