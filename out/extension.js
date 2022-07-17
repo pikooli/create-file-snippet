@@ -1,56 +1,28 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deactivate = exports.activate = void 0;
-const fs = require("fs");
+const utils_1 = require("./utils");
 const vscode_1 = require("vscode");
+const EXTENSION_NAME = "snippet.file_snippet";
 const wsPath = vscode_1.workspace.workspaceFolders[0].uri.fsPath; // gets the path of the first workspace folder
+const homePath = wsPath.split("/").slice(0, 3).join("/");
+const SNIPPETS_PATH = `${homePath}/Library/Application\ Support/Code/User/snippets/snippet.code-snippets`;
 const wsedit = new vscode_1.WorkspaceEdit();
-const PROMPT = "Enter the path and name of the file you want to create. EI: apps/test.js";
-const URI = `${wsPath}/.snippet.json`;
-let currentlyOpenTabfilePath = vscode_1.window.activeTextEditor?.document?.fileName.replace(wsPath, "");
-let config;
-//
-const parceConfigFile = () => {
-    return new Promise((resolve, reject) => {
-        fs.readFile(URI, "utf8", (err, data) => {
-            try {
-                config = JSON.parse(data);
-                for (let key in config) {
-                    config[key].body = new vscode_1.SnippetString(config[key].body.join("\n"));
-                }
-                resolve(config);
-            }
-            catch (e) {
-                vscode_1.window.showErrorMessage("Something is wrong with the config file");
-            }
-        });
-    });
-};
-//
-const createFile = async ({ filePath, content, }) => {
-    wsedit.createFile(filePath, { ignoreIfExists: true });
-    await vscode_1.workspace.applyEdit(wsedit);
-    await vscode_1.commands.executeCommand("vscode.open", filePath);
-    vscode_1.commands.executeCommand("editor.action.insertSnippet", {
-        snippet: content.value,
-    });
-};
 //
 const main = async () => {
-    await parceConfigFile();
-    vscode_1.window
-        .showInputBox({ prompt: PROMPT, value: currentlyOpenTabfilePath })
-        .then(async (value) => {
-        if (value && value !== currentlyOpenTabfilePath) {
-            const filePath = vscode_1.Uri.file(wsPath + "/" + value);
-            console.log("filePath", filePath);
-            await createFile({ filePath, content: config["basic"].body });
-        }
-    });
+    let config;
+    config = await (0, utils_1.parceConfigFile)(SNIPPETS_PATH);
+    const option = await (0, utils_1.selectOption)(config);
+    if (option) {
+        await (0, utils_1.createFile)({
+            wsedit,
+            content: option.body,
+        });
+    }
 };
 //
 function activate(context) {
-    let disposable = vscode_1.commands.registerCommand("snippet.helloWorld", main);
+    let disposable = vscode_1.commands.registerCommand(EXTENSION_NAME, main);
     context.subscriptions.push(disposable);
 }
 exports.activate = activate;

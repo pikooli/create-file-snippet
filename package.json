@@ -1,23 +1,23 @@
 {
-  "name": "snippet",
-  "displayName": "snippet",
-  "description": "",
+  "name": "create_file_snippet",
+  "displayName": "Create file snippet",
+  "description": "Create a file with the selected snippet",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.68.0"
   },
   "categories": [
-    "Other"
+    "Snippets"
   ],
   "activationEvents": [
-    "onCommand:snippet.helloWorld"
+    "onCommand:snippet.file_snippet"
   ],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
       {
-        "command": "snippet.helloWorld",
-        "title": "Hello World"
+        "command": "snippet.file_snippet",
+        "title": "create file snippet"
       }
     ]
   },
