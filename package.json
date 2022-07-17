@@ -1,8 +1,17 @@
 {
-  "name": "create_file_snippet",
+  "name": "createfilesnippet",
   "displayName": "Create file snippet",
   "description": "Create a file with the selected snippet",
   "version": "0.0.1",
+  "publisher": "pikooli",
+  "author": {
+    "name": "Pikooli"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pikooli/create-file-snippet"
+  },
+  "license": "MIT",
   "engines": {
     "vscode": "^1.68.0"
   },
@@ -30,7 +39,7 @@
     "test": "node ./out/test/runTest.js"
   },
   "devDependencies": {
-    "@types/vscode": "^1.69.0",
+    "@types/vscode": "^1.68.0",
     "@types/glob": "^7.2.0",
     "@types/mocha": "^9.1.1",
     "@types/node": "16.x",
