@@ -2,7 +2,7 @@
   "name": "createfilesnippet",
   "displayName": "Create file snippet",
   "description": "Create a file with the selected snippet",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "publisher": "pikooli",
   "author": {
     "name": "Pikooli"
