@@ -1,3 +1,7 @@
-export { parceConfigFile } from "./parceFile";
-export { createFile } from "./createFile";
-export { selectOption } from "./selectOption";
+export * from "./parceFile";
+export * from "./createFile";
+export * from "./selectOption";
+export * from "./createFolder";
+export * from "./showMessage";
+export * from "./writeSnippet";
+export * from "./checkFileFolder";

@@ -1,8 +1,8 @@
 {
-  "name": "createfilesnippet",
-  "displayName": "Create file snippet",
+  "name": "vscode-create-file-snippet",
+  "displayName": "Create file with snippet",
   "description": "Create a file with the selected snippet",
-  "version": "0.0.2",
+  "version": "0.0.1",
   "publisher": "pikooli",
   "author": {
     "name": "Pikooli"
@@ -19,14 +19,24 @@
     "Snippets"
   ],
   "activationEvents": [
-    "onCommand:snippet.file_snippet"
+    "onCommand:vscode-create-file-snippet.file_snippet",
+    "onCommand:vscode-create-file-snippet.folder",
+    "onCommand:vscode-create-file-snippet.file"
   ],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
       {
-        "command": "snippet.file_snippet",
+        "command": "vscode-create-file-snippet.file_snippet",
         "title": "create file snippet"
+      },
+      {
+        "command": "vscode-create-file-snippet.folder",
+        "title": "create folder"
+      },
+      {
+        "command": "vscode-create-file-snippet.file",
+        "title": "create file"
       }
     ]
   },

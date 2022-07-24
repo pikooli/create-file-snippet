@@ -1,36 +1,34 @@
-import { parceConfigFile, createFile, selectOption } from "./utils";
-import { Config } from "./type";
+import { commands, ExtensionContext } from "vscode";
 import {
-  commands,
-  ExtensionContext,
-  SnippetString,
-  workspace,
-  WorkspaceEdit,
-} from "vscode";
+  createFolderCommand,
+  createFileSnippetCommand,
+  createFileCommand,
+} from "./commands";
 
-const EXTENSION_NAME = "snippet.file_snippet";
-const wsPath = workspace.workspaceFolders![0].uri.fsPath; // gets the path of the first workspace folder
-const homePath = wsPath.split("/").slice(0, 3).join("/");
-const SNIPPETS_PATH = `${homePath}/Library/Application\ Support/Code/User/snippets/snippet.code-snippets`;
-const wsedit = new WorkspaceEdit();
-
-//
-const main = async () => {
-  let config: Config;
-  config = await parceConfigFile(SNIPPETS_PATH);
-  const option = await selectOption(config);
-  if (option) {
-    await createFile({
-      wsedit,
-      content: option.body as SnippetString,
-    });
-  }
+const COMMANDS_NAME = {
+  createFolder: "vscode-create-file-snippet.folder",
+  createFileSnippet: "vscode-create-file-snippet.file_snippet",
+  createFile: "vscode-create-file-snippet.file",
 };
 
 //
 export function activate(context: ExtensionContext) {
-  let disposable = commands.registerCommand(EXTENSION_NAME, main);
-  context.subscriptions.push(disposable);
+  let disposableFolder = commands.registerCommand(
+    COMMANDS_NAME["createFolder"],
+    createFolderCommand
+  );
+  let disposableFileSnippet = commands.registerCommand(
+    COMMANDS_NAME["createFileSnippet"],
+    createFileSnippetCommand
+  );
+  let disposableFile = commands.registerCommand(
+    COMMANDS_NAME["createFile"],
+    createFileCommand
+  );
+
+  context.subscriptions.push(disposableFolder);
+  context.subscriptions.push(disposableFileSnippet);
+  context.subscriptions.push(disposableFile);
 }
 
 export function deactivate() {}

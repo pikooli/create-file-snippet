@@ -1,12 +1,16 @@
 import * as fs from "fs";
-import { SnippetString, window } from "vscode";
+import { SnippetString } from "vscode";
+import { messages } from "../I18n";
 import { Config } from "../type";
+import { showErrorMessage } from "./index";
 
 //
 export const parceConfigFile = (path: string) => {
   return new Promise((resolve: (config: Config) => void, reject) => {
     fs.readFile(path, "utf8", (err, data) => {
-      if (err) console.log(err);
+      if (err) {
+        return showErrorMessage(messages.errors.configFile);
+      }
       try {
         const config = JSON.parse(data) as Config;
         for (let key in config) {
@@ -23,8 +27,8 @@ export const parceConfigFile = (path: string) => {
         }
         resolve(config);
       } catch (e) {
-        console.log(e);
-        window.showErrorMessage("Something is wrong with the config file");
+        showErrorMessage(messages.errors.configFile);
+        throw e;
       }
     });
   });

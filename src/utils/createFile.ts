@@ -1,24 +1,14 @@
-import {
-  window,
-  commands,
-  Uri,
-  SnippetString,
-  workspace,
-  WorkspaceEdit,
-} from "vscode";
+import { window, Uri, workspace, WorkspaceEdit, FileType } from "vscode";
+import { messages } from "../I18n";
+import { showErrorMessage } from "./showMessage";
+import { checkFileFolder } from "./index";
 
 const PROMPT =
   "Enter the path and name of the file you want to create. EI: apps/test.js";
 const wsPath = workspace.workspaceFolders![0].uri.fsPath; // gets the path of the first workspace folder
 
 //
-export const createFile = async ({
-  wsedit,
-  content,
-}: {
-  wsedit: WorkspaceEdit;
-  content: SnippetString;
-}) => {
+export const createFile = async ({ wsedit }: { wsedit: WorkspaceEdit }) => {
   const currentlyOpenTabfilePath =
     window.activeTextEditor?.document?.fileName.replace(wsPath, "");
   const fileName = await window.showInputBox({
@@ -26,13 +16,18 @@ export const createFile = async ({
     value: currentlyOpenTabfilePath,
   });
 
-  if (fileName && fileName !== currentlyOpenTabfilePath && content?.value) {
-    const filePath = Uri.file(wsPath + "/" + fileName);
-    wsedit.createFile(filePath, { ignoreIfExists: true });
-    await workspace.applyEdit(wsedit);
-    await commands.executeCommand("vscode.open", filePath);
-    commands.executeCommand("editor.action.insertSnippet", {
-      snippet: content.value,
-    });
+  if (fileName && fileName !== currentlyOpenTabfilePath) {
+    try {
+      const filePath = Uri.file(wsPath + "/" + fileName);
+      if (await checkFileFolder(filePath, FileType.File)) {
+        throw messages.errors.creatingFile;
+      }
+      wsedit.createFile(filePath, { ignoreIfExists: true });
+      await workspace.applyEdit(wsedit);
+      return filePath;
+    } catch (e) {
+      showErrorMessage(messages.errors.creatingFile);
+      throw e;
+    }
   }
 };

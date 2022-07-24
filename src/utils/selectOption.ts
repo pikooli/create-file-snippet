@@ -1,5 +1,6 @@
 import { window } from "vscode";
 import { Config } from "../type";
+import { showInformationMessage } from "./index";
 
 //
 export const selectOption = async (config: Config) => {
@@ -9,7 +10,7 @@ export const selectOption = async (config: Config) => {
   }
 
   const result = await window.showQuickPick(keys);
-  window.showInformationMessage(`Selected: ${result}`);
+  showInformationMessage(`Selected: ${result}`);
   for (let k in config) {
     if (config[k].prefix === result) {
       return config[k];
