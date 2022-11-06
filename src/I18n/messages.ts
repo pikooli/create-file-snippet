@@ -5,7 +5,9 @@ export const messages = {
     creatingFileSnippet: "Success: File snippet have been created",
   },
   errors: {
-    configFile: "Error: Something is wrong with the config file",
+    configFile:
+      "Error: Something is wrong reading the config file, make sure to create a global snippet file with the name : snippets.code-snippets",
+    readFile: "Error: Something is wrong reading a file",
     creatingFolder: "Error: Creating folder",
     creatingFile: "Error: Creating file",
     creatingFileSnippet: "Error: Creating file snippet",

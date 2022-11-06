@@ -1,4 +1,4 @@
-export * from "./parceFile";
+export * from "./parceConfigFile";
 export * from "./createFile";
 export * from "./selectOption";
 export * from "./createFolder";

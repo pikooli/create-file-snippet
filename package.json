@@ -28,15 +28,15 @@
     "commands": [
       {
         "command": "vscode-create-file-snippet.file_snippet",
-        "title": "create file snippet"
+        "title": "fs: create file snippet"
       },
       {
         "command": "vscode-create-file-snippet.folder",
-        "title": "create folder"
+        "title": "fs: create folder"
       },
       {
         "command": "vscode-create-file-snippet.file",
-        "title": "create file"
+        "title": "fs: create file"
       }
     ]
   },

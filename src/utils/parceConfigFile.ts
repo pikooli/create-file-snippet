@@ -9,7 +9,7 @@ export const parceConfigFile = (path: string) => {
   return new Promise((resolve: (config: Config) => void, reject) => {
     fs.readFile(path, "utf8", (err, data) => {
       if (err) {
-        return showErrorMessage(messages.errors.configFile);
+        return reject(err.message);
       }
       try {
         const config = JSON.parse(data) as Config;
@@ -27,7 +27,7 @@ export const parceConfigFile = (path: string) => {
         }
         resolve(config);
       } catch (e) {
-        showErrorMessage(messages.errors.configFile);
+        showErrorMessage(messages.errors.readFile);
         throw e;
       }
     });

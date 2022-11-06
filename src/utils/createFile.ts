@@ -5,9 +5,10 @@ import { checkFileFolder } from "./index";
 
 const PROMPT =
   "Enter the path and name of the file you want to create. EI: apps/test.js";
-const wsPath = workspace.workspaceFolders![0].uri.fsPath; // gets the path of the first workspace folder
 
-//
+// gets the path of the first workspace folder
+const wsPath = workspace.workspaceFolders![0].uri.fsPath;
+
 export const createFile = async ({ wsedit }: { wsedit: WorkspaceEdit }) => {
   const currentlyOpenTabfilePath =
     window.activeTextEditor?.document?.fileName.replace(wsPath, "");
