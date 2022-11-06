@@ -3,6 +3,7 @@
 Features --------------
 
 Create a file and put a snippet inside
+
 Look at exemple in file .snippet.json
 
 Requirements --------------
