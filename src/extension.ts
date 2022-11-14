@@ -3,32 +3,40 @@ import {
   createFolderCommand,
   createFileSnippetCommand,
   createFileCommand,
+  createFilesSnippetsCommand,
 } from "./commands";
 
 const COMMANDS_NAME = {
   createFolder: "vscode-create-file-snippet.folder",
   createFileSnippet: "vscode-create-file-snippet.file_snippet",
   createFile: "vscode-create-file-snippet.file",
+  createFilesSnippets: "vscode-create-file-snippet.file_snippets",
 };
 
 //
 export function activate(context: ExtensionContext) {
-  let disposableFolder = commands.registerCommand(
+  const createFolder = commands.registerCommand(
     COMMANDS_NAME["createFolder"],
     createFolderCommand
   );
-  let disposableFileSnippet = commands.registerCommand(
+  const createFileSnippet = commands.registerCommand(
     COMMANDS_NAME["createFileSnippet"],
     createFileSnippetCommand
   );
-  let disposableFile = commands.registerCommand(
+  const createFile = commands.registerCommand(
     COMMANDS_NAME["createFile"],
     createFileCommand
   );
 
-  context.subscriptions.push(disposableFolder);
-  context.subscriptions.push(disposableFileSnippet);
-  context.subscriptions.push(disposableFile);
+  const createFilesSnippets = commands.registerCommand(
+    COMMANDS_NAME["createFilesSnippets"],
+    createFilesSnippetsCommand
+  );
+
+  context.subscriptions.push(createFolder);
+  context.subscriptions.push(createFileSnippet);
+  context.subscriptions.push(createFile);
+  context.subscriptions.push(createFilesSnippets);
 }
 
 export function deactivate() {}

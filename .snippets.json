@@ -1,17 +1,26 @@
 {
+  "test": {
+    "prefix": ["basic-test"],
+    "body": ["test"],
+    "description": "Tsx basic file",
+    "type": "file"
+  },
+
   "basic": {
     "prefix": ["basic-react"],
     "body": [
+      "import React from \"react\";",
       "",
       "type Props = {};",
       "",
-      "const ${TM_FILENAME/\\..*//g} : React.FC<Props> = () => {",
+      "const $0: React.FC<Props> = () => {",
       "  return <div></div>;",
       "};",
       "",
-      "export default ${TM_FILENAME/\\..*//g};"
+      "export default $0;"
     ],
-    "description": "Tsx basic file"
+    "description": "Tsx basic file",
+    "type": "file"
   },
   "container": {
     "prefix": ["react-container"],
@@ -25,7 +34,8 @@
       "  return <$0View {...hook} />;",
       "};"
     ],
-    "description": "Container for react component"
+    "description": "Container for react component",
+    "type": "file"
   },
   "hook": {
     "prefix": ["react-hook"],
@@ -40,7 +50,8 @@
       "  return { };",
       "};"
     ],
-    "description": "Hook for react component"
+    "description": "Hook for react component",
+    "type": "file"
   },
   "View": {
     "prefix": ["react-view"],
@@ -56,6 +67,30 @@
       "  );",
       "};"
     ],
-    "description": "View for react component"
+    "description": "View for react component",
+    "type": "file"
+  },
+  "Views": {
+    "prefix": ["react-views"],
+    "bodys": [
+      {
+        "prefix": "prefix",
+        "suffix": "suffix",
+        "body": [
+          "import React from \"react\";",
+          "",
+          "export type $0ViewProps = {",
+          "};",
+          "",
+          "export const $0View = ({",
+          "}: $0ViewProps) => {",
+          "  return (",
+          "  );",
+          "};"
+        ]
+      }
+    ],
+    "description": "View for react component",
+    "type": "array"
   }
 }

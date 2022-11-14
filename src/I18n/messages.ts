@@ -13,5 +13,6 @@ export const messages = {
     creatingFileSnippet: "Error: Creating file snippet",
     folderExist: "Error: Folder already exist",
     writeFile: "Error: Write file",
+    fileName: "Error: you didn't give a correct file name",
   },
 };

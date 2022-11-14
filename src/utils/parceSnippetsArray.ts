@@ -1,28 +1,32 @@
 import * as fs from "fs";
 import { SnippetString } from "vscode";
 import { messages } from "../I18n";
-import { Config } from "../type";
+import { ArrayConfig } from "../type";
 import { showErrorMessage } from "./index";
 
 //
-export const parceConfigFile = (path: string) => {
-  return new Promise((resolve: (config: Config) => void, reject) => {
+export const parceSnippetsArray = (path: string) => {
+  return new Promise((resolve: (config: ArrayConfig) => void, reject) => {
     fs.readFile(path, "utf8", (err, data) => {
       if (err) {
         return reject(err.message);
       }
       try {
-        const config = JSON.parse(data) as Config;
+        const config = JSON.parse(data) as ArrayConfig;
         for (let key in config) {
+          if (config[key].type === "file") {
+            delete config[key];
+            continue;
+          }
           if (typeof config[key].prefix !== "string") {
             config[key].prefix = (config[key].prefix as string[]).join(",");
           }
-          if (typeof config[key].body !== "string") {
-            config[key].body = new SnippetString(
-              (config[key].body as string[]).join("\n")
-            );
-          } else {
-            config[key].body = new SnippetString(config[key].body as string);
+          if (typeof config[key].bodys !== "string") {
+            for (let el in config[key].bodys) {
+              config[key].bodys[el].body = new SnippetString(
+                (config[key].bodys[el].body as string[]).join("\n")
+              );
+            }
           }
         }
         resolve(config);

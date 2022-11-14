@@ -21,7 +21,8 @@
   "activationEvents": [
     "onCommand:vscode-create-file-snippet.file_snippet",
     "onCommand:vscode-create-file-snippet.folder",
-    "onCommand:vscode-create-file-snippet.file"
+    "onCommand:vscode-create-file-snippet.file",
+    "onCommand:vscode-create-file-snippet.file_snippets"
   ],
   "main": "./out/extension.js",
   "contributes": {
@@ -37,6 +38,10 @@
       {
         "command": "vscode-create-file-snippet.file",
         "title": "fs: create file"
+      },
+      {
+        "command": "vscode-create-file-snippet.file_snippets",
+        "title": "fs: create files snippets"
       }
     ]
   },
