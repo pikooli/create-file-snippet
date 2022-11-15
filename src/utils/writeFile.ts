@@ -1,13 +1,12 @@
 import { commands, Uri, SnippetString } from "vscode";
 import { messages } from "../I18n";
-import { showErrorMessage } from "./showMessage";
 
 //
-export const writeSnippet = async ({
+export const writeFile = async ({
   filePath,
   content,
 }: {
-  filePath: Uri;
+  filePath?: Uri;
   content: SnippetString;
 }) => {
   if (filePath && content?.value) {
@@ -17,8 +16,7 @@ export const writeSnippet = async ({
         snippet: content.value,
       });
     } catch (e) {
-      showErrorMessage(messages.errors.writeFile);
-      throw e;
+      throw messages.errors.writeFile;
     }
   }
 };

@@ -4,19 +4,17 @@ import {
   createFile,
   selectOptionArray,
   showInformationMessage,
-  writeSnippet,
+  writeFile,
   showErrorMessage,
-  askFileName,
+  promptName,
 } from "../utils";
 import { ArrayConfig } from "../type";
 import { messages } from "../I18n";
+import { CONFIG_FILE } from "../constant";
 
 const wsPath = workspace.workspaceFolders![0].uri.fsPath; // gets the path of the first workspace folder
 const wsedit = new WorkspaceEdit();
-
-// const homePath = wsPath.split("/").slice(0, 3).join("/");
-// const SNIPPETS_PATH = `${homePath}/Library/Application Support/Code/User/snippets/snippet.code-snippets`;
-const SNIPPETS_PATH = `${wsPath}/.snippets.json`;
+const SNIPPETS_PATH = wsPath + "/" + CONFIG_FILE;
 
 //
 export const createFilesSnippetsCommand = async () => {
@@ -29,7 +27,7 @@ export const createFilesSnippetsCommand = async () => {
   const option = await selectOptionArray(config);
   if (option) {
     try {
-      const fileName = await askFileName();
+      const fileName = await promptName({ type: "file" });
       for (let i = 0; i < option.bodys.length; i++) {
         const el = option.bodys[i];
         const filePath: Uri | undefined = await createFile({
@@ -37,10 +35,12 @@ export const createFilesSnippetsCommand = async () => {
           fileName: el.prefix + fileName + el.suffix,
         });
         if (filePath) {
-          writeSnippet({ filePath, content: el.body as SnippetString });
+          writeFile({ filePath, content: el.body as SnippetString });
         }
       }
       showInformationMessage(messages.success.creatingFileSnippet);
-    } catch (e) {}
+    } catch (e) {
+      return showErrorMessage(e as string);
+    }
   }
 };

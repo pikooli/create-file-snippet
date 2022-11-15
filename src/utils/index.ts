@@ -4,6 +4,6 @@ export * from "./createFile";
 export * from "./selectOption";
 export * from "./createFolder";
 export * from "./showMessage";
-export * from "./writeSnippet";
+export * from "./writeFile";
 export * from "./checkFileFolder";
-export * from "./askFileName";
+export * from "./promptName";

@@ -6,5 +6,7 @@ export const checkFileFolder = async (
 ) => {
   try {
     return (await workspace.fs.stat(uri)).type === format;
-  } catch (e) {}
+  } catch (e) {
+    throw e;
+  }
 };
