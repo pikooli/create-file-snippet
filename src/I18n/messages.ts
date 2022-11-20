@@ -14,5 +14,6 @@ export const messages = {
     folderExist: "Error: Folder already exist",
     writeFile: "Error: Write file",
     fileName: "Error: you didn't give a correct file name",
+    fileAlreadyExist: "Error: The file already exist",
   },
 };

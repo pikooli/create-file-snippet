@@ -32,13 +32,14 @@ export const createFilesSnippetsCommand = async () => {
         const el = option.bodys[i];
         const filePath: Uri | undefined = await createFile({
           wsedit,
-          fileName: el.prefix + fileName + el.suffix,
+          fileName: (el.prefix ??'') + fileName + (el.suffix ?? ''),
         });
         if (filePath) {
           writeFile({ filePath, content: el.body as SnippetString });
+          showInformationMessage(messages.success.creatingFileSnippet);
         }
+        showErrorMessage(messages.errors.creatingFile);
       }
-      showInformationMessage(messages.success.creatingFileSnippet);
     } catch (e) {
       return showErrorMessage(e as string);
     }
