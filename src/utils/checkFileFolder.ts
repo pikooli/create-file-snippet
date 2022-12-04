@@ -1,8 +1,8 @@
-import {Uri, workspace, FileType} from "vscode";
+import { Uri, workspace, FileType } from "vscode";
 
 export const checkFileFolder = async (
-    uri: Uri,
-    format: FileType.Directory | FileType.File
+  uri: Uri,
+  format: FileType.Directory | FileType.File
 ) => {
   let stat;
   try {

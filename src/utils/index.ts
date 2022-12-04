@@ -7,3 +7,4 @@ export * from "./showMessage";
 export * from "./writeFile";
 export * from "./checkFileFolder";
 export * from "./promptName";
+export * from "./getCurrentWorkspacePath";
