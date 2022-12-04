@@ -11,7 +11,7 @@ export const createFile = async ({ fileName }: { fileName?: string }) => {
   const wsedit = new WorkspaceEdit();
 
   const filePath = Uri.file(wsPath + "/" + fileName);
-  if (await checkFileFolder(filePath, FileType.File)) {
+  if (await checkFileFolder({ uri: filePath, type: FileType.File })) {
     return;
   }
 

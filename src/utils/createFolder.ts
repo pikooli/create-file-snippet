@@ -10,7 +10,7 @@ export const createFolder = async () => {
     const folderName = await promptName({ type: "folder" });
     if (folderName) {
       const uri = Uri.file(wsPath + "/" + folderName);
-      if (await checkFileFolder(uri, FileType.Directory)) {
+      if (await checkFileFolder({ uri, type: FileType.Directory })) {
         return showErrorMessage(messages.errors.folderExist);
       }
       await workspace.fs.createDirectory(uri);
