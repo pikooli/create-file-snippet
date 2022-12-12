@@ -20,7 +20,7 @@ export const promptName = async ({ type }: Props) => {
     value: currentlyOpenTabfilePath,
   });
 
-  if (!fileName && fileName === currentlyOpenTabfilePath) {
+  if (!fileName || fileName === currentlyOpenTabfilePath) {
     throw messages.errors.fileName;
   }
   return fileName;
