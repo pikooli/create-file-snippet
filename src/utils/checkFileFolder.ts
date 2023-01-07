@@ -1,18 +1,21 @@
-import { Uri, workspace, FileType } from "vscode";
+import * as fs from "fs";
 
-export const checkFileFolder = async (params: {
-  uri: Uri;
-  type: FileType.Directory | FileType.File;
-}) => {
+export const checkIsAFile = async (path: fs.PathLike) => {
   let stat;
-  const { uri, type } = params;
-  console.log("==============");
-  console.log(params);
-  console.log("==============");
   try {
-    stat = await workspace.fs.stat(uri);
+    stat = fs.statSync(path);
   } catch (e) {
     return false;
   }
-  return stat?.type === type;
+  return stat.isFile();
+};
+
+export const checkIsAFolder = async (path: fs.PathLike) => {
+  let stat;
+  try {
+    stat = fs.statSync(path);
+  } catch (e) {
+    return false;
+  }
+  return stat.isDirectory();
 };

@@ -14,7 +14,9 @@ suite("Test createFile", () => {
     mockFs.restore();
   });
 
-  test("Success createFile", async () => {
+  test(`
+    Given an fileName
+    Then it should return the file Uri`, async () => {
     const uri = await createFile({ fileName });
 
     assert.strictEqual(uri?.path, "/" + fileName);

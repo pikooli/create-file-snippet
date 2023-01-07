@@ -1,7 +1,7 @@
-import { Uri, workspace, WorkspaceEdit, FileType } from "vscode";
+import { Uri, workspace, WorkspaceEdit } from "vscode";
 import { messages } from "../I18n";
-import { checkFileFolder, getCurrentWorkspacePath } from "./index";
-
+import { checkIsAFile, getCurrentWorkspacePath } from "./index";
+import * as path from "path";
 export const createFile = async ({ fileName }: { fileName?: string }) => {
   const wsPath = getCurrentWorkspacePath();
 
@@ -9,9 +9,9 @@ export const createFile = async ({ fileName }: { fileName?: string }) => {
     throw messages.errors.creatingFile;
   }
   const wsedit = new WorkspaceEdit();
-
-  const filePath = Uri.file(wsPath + "/" + fileName);
-  if (await checkFileFolder({ uri: filePath, type: FileType.File })) {
+  const currentPath = path.join(wsPath, fileName);
+  const filePath = Uri.file(currentPath);
+  if (await checkIsAFile(currentPath)) {
     return;
   }
 

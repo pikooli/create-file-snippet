@@ -9,7 +9,9 @@ suite("Test promptName", () => {
 
   after(() => (vscode.window.showInputBox = savedShowInputBox));
 
-  test("Success promptName", async () => {
+  test(`Given an input box asking for a name show up
+        When we give a name
+        Then the output should be the given name`, async () => {
     const testName = "abcd";
     vscode.window.showInputBox = async () => {
       return testName;
@@ -18,7 +20,9 @@ suite("Test promptName", () => {
     assert.strictEqual(name, testName);
   });
 
-  test("Failled promptName", async () => {
+  test(`Given an input box asking for a name show up
+        When we give nothing as name
+        Then function should fail`, async () => {
     const testName = "";
     vscode.window.showInputBox = async () => {
       return testName;

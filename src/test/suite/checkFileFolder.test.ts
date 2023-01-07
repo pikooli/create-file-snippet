@@ -1,39 +1,49 @@
 import * as assert from "assert";
 import { after, before } from "mocha";
-import { checkFileFolder } from "../../utils";
+import { checkIsAFile, checkIsAFolder } from "../../utils";
 import * as mockFs from "mock-fs";
-import { Uri, FileType } from "vscode";
+import * as path from "path";
 
-//  TODO : Fix
-// suite("Test checkFileFolder", () => {
-//   const pathFile = "test/path/file.txt";
-//   const pathFolder = "test/path";
+suite("Test checkFileFolder", () => {
+  const pathFile = "/test/path/file.txt";
+  const pathFolder = "/someRandomPath";
 
-//   before(() => {
-//     mockFs({
-//       [pathFolder]: {
-//         [pathFile]: "test",
-//       },
-//     });
-//   });
+  before(() => {
+    mockFs({
+      [pathFile]: "testtest",
+      [pathFolder]: {},
+    });
+  });
 
-//   after(() => {
-//     mockFs.restore();
-//   });
+  after(() => {
+    mockFs.restore();
+  });
 
-//   test("Success checkFileFolder", async () => {
-//     const uri = Uri.file(pathFile);
-//     const isTypeAFile = await checkFileFolder({ uri, type: FileType.File });
+  test(`Given a file path to the function checkIsAFile
+        Then it should return true`, async () => {
+    const currentPath = path.join(pathFile);
+    const isTypeAFile = await checkIsAFile(currentPath);
+    assert.strictEqual(isTypeAFile, true);
+  });
 
-//     assert.strictEqual(isTypeAFile, true);
-//   });
+  test(`Given a folder path to the function checkIsAFile
+        Then it should return false`, async () => {
+    const currentPath = path.join(pathFolder);
+    const isTypeAFile = await checkIsAFile(currentPath);
+    assert.strictEqual(isTypeAFile, false);
+  });
 
-//   test("Failled checkFileFolder", async () => {
-//     const isTypeAFile = await checkFileFolder({
-//       uri: Uri.file(pathFolder),
-//       type: FileType.File,
-//     });
+  test(`Given a folder path to the function checkIsAFolder
+        Then it should return true`, async () => {
+    const currentPath = path.join(pathFolder);
+    const isTypeAFolder = await checkIsAFolder(currentPath);
+    assert.strictEqual(isTypeAFolder, true);
+  });
 
-//     assert.strictEqual(isTypeAFile, true);
-//   });
-// });
+  test(`Given a file path to the function checkIsAFolder
+        Then it should return false`, async () => {
+    const currentPath = path.join(pathFile);
+    const isTypeAFolder = await checkIsAFolder(currentPath);
+    assert.strictEqual(isTypeAFolder, false);
+  });
+});
