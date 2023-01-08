@@ -1,4 +1,4 @@
-import { SnippetString, workspace, Uri } from "vscode";
+import { SnippetString, workspace } from "vscode";
 import {
   parceSnippets,
   createFile,

@@ -1,7 +1,7 @@
 import * as assert from "assert";
 import { after } from "mocha";
-import { promptName } from "../../utils";
-import { messages } from "../../I18n/";
+import { promptName } from "../../../utils";
+import { messages } from "../../../I18n";
 import * as vscode from "vscode";
 
 suite("Test function promptName", () => {

@@ -1,6 +1,6 @@
 import * as assert from "assert";
 import { after, before } from "mocha";
-import { checkIsAFile, checkIsAFolder } from "../../utils";
+import { checkIsAFile, checkIsAFolder } from "../../../utils";
 import * as mockFs from "mock-fs";
 import * as path from "path";
 

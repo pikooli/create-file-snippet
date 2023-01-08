@@ -1,7 +1,7 @@
 import * as assert from "assert";
 import { after, beforeEach } from "mocha";
-import { createFile } from "../../utils";
-import { messages } from "../../I18n";
+import { createFile } from "../../../utils";
+import { messages } from "../../../I18n";
 import * as mockFs from "mock-fs";
 import * as fs from "fs";
 

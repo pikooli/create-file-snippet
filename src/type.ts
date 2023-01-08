@@ -12,13 +12,11 @@ export type Config = {
 export type ArrayConfig = {
   [key: string]: {
     prefix: string[] | string;
-    bodys: [
-      {
-        suffix: string;
-        prefix: string;
-        body: string[] | SnippetString | string;
-      }
-    ];
+    bodys: {
+      suffix?: string;
+      prefix?: string;
+      body: string[] | SnippetString | string;
+    }[];
     description: string;
     type: "file" | "array";
   };
