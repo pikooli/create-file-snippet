@@ -1,4 +1,5 @@
-import { commands, Uri, SnippetString } from "vscode";
+import { PathLike } from "fs";
+import { commands, SnippetString } from "vscode";
 import { messages } from "../I18n";
 
 //
@@ -6,7 +7,7 @@ export const writeFile = async ({
   filePath,
   content,
 }: {
-  filePath?: Uri;
+  filePath?: PathLike;
   content: SnippetString;
 }) => {
   if (filePath && content?.value) {

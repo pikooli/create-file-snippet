@@ -20,26 +20,19 @@ export const createFilesSnippetsCommand = async () => {
   let config: ArrayConfig;
   try {
     config = await parceSnippetsArray(SNIPPETS_PATH);
-  } catch (e) {
-    return showErrorMessage(e as string);
-  }
-  const option = await selectOptionArray(config);
-  if (option) {
-    try {
+
+    const option = await selectOptionArray(config);
+    if (option) {
       const fileName = await promptName({ type: "file" });
       for (let i = 0; i < option.bodys.length; i++) {
         const el = option.bodys[i];
-        const filePath: Uri | undefined = await createFile({
-          fileName: (el.prefix ?? "") + fileName + (el.suffix ?? ""),
-        });
-        if (filePath) {
-          writeFile({ filePath, content: el.body as SnippetString });
-          showInformationMessage(messages.success.creatingFileSnippet);
-        }
-        showErrorMessage(messages.errors.creatingFile);
+        const fileParam = (el.prefix ?? "") + fileName + (el.suffix ?? "");
+        const filePath = await createFile(fileParam);
+        writeFile({ filePath, content: el.body as SnippetString });
+        showInformationMessage(messages.success.creatingFileSnippet);
       }
-    } catch (e) {
-      return showErrorMessage(e as string);
     }
+  } catch (e) {
+    return showErrorMessage(e as string);
   }
 };

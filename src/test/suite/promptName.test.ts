@@ -4,7 +4,7 @@ import { promptName } from "../../utils";
 import { messages } from "../../I18n/";
 import * as vscode from "vscode";
 
-suite("Test promptName", () => {
+suite("Test function promptName", () => {
   const savedShowInputBox = vscode.window.showInputBox;
 
   after(() => (vscode.window.showInputBox = savedShowInputBox));
@@ -28,7 +28,7 @@ suite("Test promptName", () => {
       return testName;
     };
     try {
-      const name = await promptName({ type: "file" });
+      await promptName({ type: "file" });
     } catch (e) {
       assert.strictEqual(e, messages.errors.fileName);
     }

@@ -1,4 +1,4 @@
-import {SnippetString, workspace, Uri} from "vscode";
+import { SnippetString, workspace, Uri } from "vscode";
 import {
   parceSnippets,
   createFile,
@@ -8,9 +8,9 @@ import {
   showErrorMessage,
   promptName,
 } from "../utils";
-import {Config} from "../type";
-import {messages} from "../I18n";
-import {CONFIG_FILE} from "../constant";
+import { Config } from "../type";
+import { messages } from "../I18n";
+import { CONFIG_FILE } from "../constant";
 
 const wsPath = workspace.workspaceFolders![0].uri.fsPath; // gets the path of the first workspace folder
 const SNIPPETS_PATH = wsPath + "/" + CONFIG_FILE;
@@ -20,20 +20,14 @@ export const createFileSnippetCommand = async () => {
   let config: Config;
   try {
     config = await parceSnippets(SNIPPETS_PATH);
+    const option = await selectOption(config);
+    if (option) {
+      const fileName = await promptName({ type: "file" });
+      const filePath = await createFile(fileName);
+      writeFile({ filePath, content: option.body as SnippetString });
+      showInformationMessage(messages.success.creatingFileSnippet);
+    }
   } catch (e) {
     return showErrorMessage(e as string);
-  }
-  const option = await selectOption(config);
-  if (option) {
-    try {
-      const fileName = await promptName({type: "file"});
-      const filePath: Uri | undefined = await createFile({
-        fileName,
-      });
-      writeFile({filePath, content: option.body as SnippetString});
-      showInformationMessage(messages.success.creatingFileSnippet);
-    } catch (e) {
-      return showErrorMessage(e as string);
-    }
   }
 };

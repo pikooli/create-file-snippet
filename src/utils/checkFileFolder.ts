@@ -1,21 +1,19 @@
 import * as fs from "fs";
 
 export const checkIsAFile = async (path: fs.PathLike) => {
-  let stat;
   try {
-    stat = fs.statSync(path);
+    const stat = fs.statSync(path);
+    return stat.isFile();
   } catch (e) {
     return false;
   }
-  return stat.isFile();
 };
 
 export const checkIsAFolder = async (path: fs.PathLike) => {
-  let stat;
   try {
-    stat = fs.statSync(path);
+    const stat = fs.statSync(path);
+    return stat.isDirectory();
   } catch (e) {
     return false;
   }
-  return stat.isDirectory();
 };
