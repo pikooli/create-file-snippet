@@ -8,7 +8,7 @@
 // import { CONFIG_FILE } from "../../constant";
 // import * as vscode from "vscode";
 
-// suite.skip("Test createFileSnippetCommand", () => {
+// suite.only("Test createFileSnippetCommand", () => {
 //   const filePath = CONFIG_FILE;
 //   const testName = "abcd";
 //   vscode.window.showInputBox = async () => {

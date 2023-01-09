@@ -1,5 +1,5 @@
 import { PathLike } from "fs";
-import { commands, SnippetString, Uri } from "vscode";
+import { commands, Uri } from "vscode";
 import { messages } from "../I18n";
 //
 export const writeFile = async ({
@@ -7,14 +7,14 @@ export const writeFile = async ({
   content,
 }: {
   filePath?: PathLike;
-  content: SnippetString;
+  content: string;
 }) => {
   try {
-    if (filePath && content?.value) {
+    if (filePath && content) {
       const uriFile = Uri.file(filePath.toString());
       await commands.executeCommand("vscode.open", uriFile);
       commands.executeCommand("editor.action.insertSnippet", {
-        snippet: content.value,
+        snippet: content,
       });
     }
   } catch (e) {

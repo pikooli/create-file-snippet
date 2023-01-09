@@ -28,7 +28,7 @@ export const createFilesSnippetsCommand = async () => {
         const el = option.bodys[i];
         const fileParam = (el.prefix ?? "") + fileName + (el.suffix ?? "");
         const filePath = await createFile(fileParam);
-        writeFile({ filePath, content: el.body as SnippetString });
+        writeFile({ filePath, content: (el.body as SnippetString).value });
         showInformationMessage(messages.success.creatingFileSnippet);
       }
     }
