@@ -1,4 +1,4 @@
-import { ArrayConfig, Config } from "../type";
+import { ArrayConfig } from "../type";
 
 export const configFile = {
   test: {
@@ -7,6 +7,31 @@ export const configFile = {
     description: "Tsx basic file",
     type: "file",
   },
+  views: {
+    prefix: ["react-views"],
+    bodys: [
+      {
+        prefix: "1",
+        body: ["1"],
+      },
+      {
+        prefix: "2",
+        body: ["2"],
+      },
+    ],
+    description: "View for react component",
+    type: "array",
+  },
+};
+
+export const configFilePolluted = {
+  test: {
+    prefix: ["basic-test"],
+    body: ["test"],
+    description: "Tsx basic file",
+    type: "file",
+  },
+  pollution: ["dqsdsd", "fsdfsf"],
   views: {
     prefix: ["react-views"],
     bodys: [

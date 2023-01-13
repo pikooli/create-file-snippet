@@ -3,13 +3,14 @@ import { after, before } from "mocha";
 import { parceSnippets } from "../../../utils";
 import * as mockFs from "mock-fs";
 import { messages } from "../../../I18n";
-import { configFile } from "../../configSetup";
+import { configFile, configFilePolluted } from "../../configSetup";
 import { CONFIG_FILE } from "../../../constant";
 
 suite("Test parceSnippets", () => {
   const configFilePath = CONFIG_FILE;
   const fsConfig = {
     [configFilePath]: JSON.stringify(configFile),
+    ["pollutedFile.json"]: JSON.stringify(configFilePolluted),
   };
 
   before(() => {
@@ -46,6 +47,17 @@ suite("Test parceSnippets", () => {
   `, async () => {
     try {
       await parceSnippets("path/to/fakepath");
+    } catch (e) {
+      assert.strictEqual(e, messages.errors.configFile);
+    }
+  });
+
+  test(`
+    Given an polluted configFile to the function parceSnippets
+    Then it should throw an error
+  `, async () => {
+    try {
+      await parceSnippets("pollutedFile.json");
     } catch (e) {
       assert.strictEqual(e, messages.errors.configFile);
     }
