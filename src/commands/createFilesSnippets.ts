@@ -1,4 +1,4 @@
-import { SnippetString, workspace, Uri } from "vscode";
+import { SnippetString, workspace } from "vscode";
 import {
   parceSnippetsArray,
   createFile,
@@ -7,6 +7,7 @@ import {
   writeFile,
   showErrorMessage,
   promptName,
+  selectMultipleSnippetFile,
 } from "../utils";
 import { ArrayConfig } from "../type";
 import { messages } from "../I18n";
@@ -23,13 +24,19 @@ export const createFilesSnippetsCommand = async () => {
 
     const option = await selectOptionArray(config);
     if (option) {
+      const filesIndex = await selectMultipleSnippetFile(option);
       const fileName = await promptName({ type: "file" });
-      for (let i = 0; i < option.bodys.length; i++) {
-        const el = option.bodys[i];
-        const fileParam = (el.prefix ?? "") + fileName + (el.suffix ?? "");
-        const filePath = await createFile(fileParam);
-        writeFile({ filePath, content: (el.body as SnippetString).value });
-        showInformationMessage(messages.success.creatingFileSnippet);
+      const bodys = option.bodys.filter((_option, idx) => {
+        return filesIndex?.includes(idx);
+      });
+      if (bodys?.length) {
+        for (let i = 0; i < bodys.length; i++) {
+          const el = bodys[i];
+          const fileParam = (el.prefix ?? "") + fileName + (el.suffix ?? "");
+          const filePath = await createFile(fileParam);
+          writeFile({ filePath, content: (el.body as SnippetString).value });
+          showInformationMessage(messages.success.creatingFileSnippet);
+        }
       }
     }
   } catch (e) {
