@@ -1,0 +1,37 @@
+{
+  "Views": {
+    "prefix": ["react-views"],
+    "bodys": [
+      {
+        "prefix": "1",
+        "suffix": ".tsx",
+        "body": [
+          "export type FirstViewProps = {",
+          "};",
+          "",
+          "export const FirstView = ({",
+          "}: FirstViewProps) => {",
+          "  return (",
+          "  );",
+          "};"
+        ]
+      },
+      {
+        "prefix": "2",
+        "suffix": ".tsx",
+        "body": [
+          "export type SecondViewProps = {",
+          "};",
+          "",
+          "export const SecondView = ({",
+          "}: SecondViewProps) => {",
+          "  return (",
+          "  );",
+          "};"
+        ]
+      }
+    ],
+    "description": "Multiple react component",
+    "type": "array"
+  }
+}

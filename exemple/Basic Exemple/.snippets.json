@@ -1,0 +1,69 @@
+{
+  "basic": {
+    "prefix": ["basic-react"],
+    "body": [
+      "import React from \"react\";",
+      "",
+      "type Props = {};",
+      "",
+      "export const BasicReact: React.FC<Props> = () => {",
+      "  return <div></div>;",
+      "};",
+      ""
+    ],
+    "description": "Tsx basic file",
+    "type": "file"
+  },
+  "View": {
+    "prefix": ["react-view"],
+    "body": [
+      "import React from \"react\";",
+      "",
+      "export type ViewProps = {",
+      "};",
+      "",
+      "export const View = ({",
+      "}: ViewProps) => {",
+      "  return (",
+      "  );",
+      "};"
+    ],
+    "description": "View for react component",
+    "type": "file"
+  },
+  "Views": {
+    "prefix": ["react-views"],
+    "bodys": [
+      {
+        "prefix": "1",
+        "suffix": ".tsx",
+        "body": [
+          "export type FirstViewProps = {",
+          "};",
+          "",
+          "export const FirstView = ({",
+          "}: FirstViewProps) => {",
+          "  return (",
+          "  );",
+          "};"
+        ]
+      },
+      {
+        "prefix": "2",
+        "suffix": ".tsx",
+        "body": [
+          "export type SecondViewProps = {",
+          "};",
+          "",
+          "export const SecondView = ({",
+          "}: SecondViewProps) => {",
+          "  return (",
+          "  );",
+          "};"
+        ]
+      }
+    ],
+    "description": "Multiple react component",
+    "type": "array"
+  }
+}

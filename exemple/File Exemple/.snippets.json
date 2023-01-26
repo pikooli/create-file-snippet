@@ -1,0 +1,17 @@
+{
+  "basic": {
+    "prefix": ["basic-react"],
+    "body": [
+      "import React from \"react\";",
+      "",
+      "type Props = {};",
+      "",
+      "export const BasicReact: React.FC<Props> = () => {",
+      "  return <div></div>;",
+      "};",
+      ""
+    ],
+    "description": "Tsx basic file",
+    "type": "file"
+  }
+}
