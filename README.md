@@ -1,17 +1,13 @@
-###create file snippet"extension
+# Create file with snippet
 
-Features --------------
+<img src="https://github.com/pikooli/create-file-snippet/blob/main/gif/exemple.gif" />
+
+# Features
 
 Create a file and put a snippet inside
+You can create multiple file with snippet by specify it in the config file.
 
-Look at exemple in file .snippet.json
+# Requirements 
 
-Requirements --------------
-
-Create a global snippet file and add some snippet
-
-Release Notes --------------
-
--------------- 0.0.1 --------------
-
-First Working version
+Create a config file *.snippets.json* on the root of your project.
+You can check the folder exemple to know how format it.
