@@ -2,7 +2,7 @@
   "name": "vscode-create-file-snippet",
   "displayName": "Create file with snippet",
   "description": "Create a file with the selected snippet",
-  "version": "0.0.8",
+  "version": "0.0.81",
   "publisher": "pikooli",
   "author": {
     "name": "Pikooli"
@@ -24,7 +24,7 @@
     "onCommand:vscode-create-file-snippet.file",
     "onCommand:vscode-create-file-snippet.file_snippets"
   ],
-  "main": "./out/extension.js",
+  "main": "./out/main.js",
   "contributes": {
     "commands": [
       {
@@ -46,13 +46,17 @@
     ]
   },
   "scripts": {
-    "vscode:prepublish": "npm run compile",
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
     "pretest": "npm run compile && npm run lint",
     "lint": "eslint src --ext ts",
     "test": "node ./out/test/runTest.js",
-    "publish": "vsce package && vsce publish"
+    "publish": "vsce package && vsce publish",
+    "vscode:prepublish": "npm run esbuild-base -- --minify",
+    "esbuild-base": "esbuild ./src/extension.ts --bundle --outfile=out/main.js --external:vscode --format=cjs --platform=node",
+    "esbuild": "npm run esbuild-base -- --sourcemap",
+    "esbuild-watch": "npm run esbuild-base -- --sourcemap --watch",
+    "test-compile": "tsc -p ./"
   },
   "devDependencies": {
     "@types/glob": "^7.2.0",
@@ -63,6 +67,7 @@
     "@typescript-eslint/eslint-plugin": "^5.30.0",
     "@typescript-eslint/parser": "^5.30.0",
     "@vscode/test-electron": "^2.1.5",
+    "esbuild": "^0.17.7",
     "eslint": "^8.18.0",
     "glob": "^8.0.3",
     "mocha": "^10.0.0",
