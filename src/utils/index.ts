@@ -9,3 +9,5 @@ export * from "./checkFileFolder";
 export * from "./promptName";
 export * from "./getCurrentWorkspacePath";
 export * from "./selectMultipleSnippetFile";
+export * from "./createIndex";
+export * from "./formatName";

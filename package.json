@@ -2,7 +2,7 @@
   "name": "vscode-create-file-snippet",
   "displayName": "Create file with snippet",
   "description": "Create a file with the selected snippet",
-  "version": "0.0.5",
+  "version": "0.0.8",
   "publisher": "pikooli",
   "author": {
     "name": "Pikooli"
@@ -52,7 +52,7 @@
     "pretest": "npm run compile && npm run lint",
     "lint": "eslint src --ext ts",
     "test": "node ./out/test/runTest.js",
-    "publish": "vsce publish"
+    "publish": "vsce package && vsce publish"
   },
   "devDependencies": {
     "@types/glob": "^7.2.0",

@@ -14,6 +14,7 @@ export const createFile = async (filePath: string) => {
   if (await checkIsAFile(completeFilePath)) {
     throw messages.errors.fileAlreadyExist;
   }
+
   const fileUri = Uri.file(completeFilePath);
   wsedit.createFile(fileUri);
   await workspace.applyEdit(wsedit);

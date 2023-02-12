@@ -8,6 +8,7 @@ export interface OptionBodys {
   suffix?: string;
   prefix?: string;
   name?: string;
+  isIndex?: Boolean;
   body: Body;
 }
 

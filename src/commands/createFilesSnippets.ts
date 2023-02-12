@@ -8,6 +8,8 @@ import {
   showErrorMessage,
   promptName,
   selectMultipleSnippetFile,
+  createIndex,
+  formatName,
 } from "../utils";
 import { ArrayConfig } from "../type";
 import { messages } from "../I18n";
@@ -31,10 +33,17 @@ export const createFilesSnippetsCommand = async () => {
       });
       if (bodys?.length) {
         for (let i = 0; i < bodys.length; i++) {
-          const el = bodys[i];
-          const fileParam = (el.prefix ?? "") + fileName + (el.suffix ?? "");
-          const filePath = await createFile(fileParam);
-          writeFile({ filePath, content: (el.body as SnippetString).value });
+          const body = bodys[i];
+          const fileParam = formatName({
+            fileName,
+            prefix: body.prefix,
+            suffix: body.suffix,
+          });
+          let filePath = await createFile(fileParam);
+          writeFile({ filePath, content: (body.body as SnippetString).value });
+          if (body.isIndex) {
+            filePath = await createIndex(filePath);
+          }
           showInformationMessage(messages.success.creatingFileSnippet);
         }
       }
