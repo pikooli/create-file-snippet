@@ -1,0 +1,54 @@
+{
+  "react-container": {
+    "prefix": ["react-container"],
+    "bodys": [
+      {
+        "suffix": ".container.tsx",
+        "body": [
+          "import {${TM_FILENAME/^([^.]+)|(.*)/${1:/capitalize}/g}View, ${TM_FILENAME/^([^.]+)|(.*)/${1:/capitalize}/g}ViewProps} from './${TM_FILENAME/^([^.]+)|(.*)/${1:/capitalize}/g}.view'",
+          "import {use${TM_FILENAME/^([^.]+)|(.*)/${1:/capitalize}/g}, Use${TM_FILENAME/^([^.]+)|(.*)/${1:/capitalize}/g}} from './use${TM_FILENAME/^([^.]+)|(.*)/${1:/capitalize}/g}'",
+          "",
+          "export interface ${TM_FILENAME/^([^.]+)|(.*)/${1:/capitalize}/g}Props extends Use${TM_FILENAME/^([^.]+)|(.*)/${1:/capitalize}/g},",
+          " ${TM_FILENAME/^([^.]+)|(.*)/${1:/capitalize}/g}ViewProps {}",
+          "",
+          "export function ${TM_FILENAME/^([^.]+)|(.*)/${1:/capitalize}/g} (props: ${TM_FILENAME/^([^.]+)|(.*)/${1:/capitalize}/g}Props) {",
+          "const {} = props;",
+          "const ${TM_FILENAME/^([^.]+)|(.*)/$1/g}HookProps = use${TM_FILENAME/^([^.]+)|(.*)/${1:/capitalize}/g}();",
+          "",
+          "return (",
+          "<${TM_FILENAME/^([^.]+)|(.*)/${1:/capitalize}/g}View {...${TM_FILENAME/^([^.]+)|(.*)/$1/g}HookProps}/>);",
+          "};"
+        ]
+      },
+      {
+        "suffix": ".view.tsx",
+        "body": [
+          "export interface ${TM_FILENAME/^([^.]+)|(.*)/${1:/capitalize}/g}ViewProps {",
+          "};",
+          "",
+          "export function ${TM_FILENAME/^([^.]+)|(.*)/${1:/capitalize}/g}View (props: ${TM_FILENAME/^([^.]+)|(.*)/${1:/capitalize}/g}ViewProps) {",
+          "const {} = props;",
+          "",
+          "return ();",
+          "};"
+        ]
+      },
+      {
+        "prefix": "use",
+        "suffix": ".tsx",
+        "body": [
+          "export interface ${TM_FILENAME/^([^.]+)|(.*)/${1:/capitalize}/g}Props  {",
+          "};",
+          "",
+          "export function ${TM_FILENAME/^([^.]+)|(.*)/${1:/capitalize}/g} (props: ${TM_FILENAME/^([^.]+)|(.*)/${1:/capitalize}/g}Props) {",
+          "const {} = props;",
+          "",
+          "return ();",
+          "};"
+        ]
+      }
+    ],
+    "description": "Multiple react component",
+    "type": "array"
+  }
+}
